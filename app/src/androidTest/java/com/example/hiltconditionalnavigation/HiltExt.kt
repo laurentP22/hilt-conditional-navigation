@@ -16,6 +16,7 @@
 
 package com.example.hiltconditionalnavigation
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -37,7 +38,7 @@ import androidx.test.core.app.ApplicationProvider
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,
     @StyleRes themeResId: Int = R.style.FragmentScenarioEmptyFragmentActivityTheme,
-    crossinline action: Fragment.() -> Unit = {}
+    crossinline action: Activity.() -> Unit = {}
 ) {
     val startActivityIntent = Intent.makeMainActivity(
         ComponentName(
@@ -54,11 +55,11 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
             Preconditions.checkNotNull(T::class.java.classLoader),
             T::class.java.name
         )
+        activity.action()
         fragment.arguments = fragmentArgs
         activity.supportFragmentManager
             .beginTransaction()
             .add(android.R.id.content, fragment, "")
             .commitNow()
-        fragment.action()
     }
 }

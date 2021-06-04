@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import com.example.hiltconditionalnavigation.R
 import com.example.hiltconditionalnavigation.ui.MainViewModel
 import com.example.hiltconditionalnavigation.ui.login.LoginFragment
@@ -15,7 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val navController by lazy { findNavController() }
+    private val navController by lazy {
+        Navigation.findNavController(requireActivity(), R.id.main_nav_host)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

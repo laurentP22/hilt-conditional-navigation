@@ -51,7 +51,7 @@ class ProfileFragmentTest {
             navController.setViewModelStore(ViewModelStore())
             navController.setGraph(R.navigation.nav_main)
             navController.setCurrentDestination(R.id.profileFragment)
-            Navigation.setViewNavController(requireView(), navController)
+            Navigation.setViewNavController(findViewById(R.id.main_nav_host), navController)
         }
 
         assertEquals(navController.currentDestination?.id, R.id.loginFragment)
@@ -67,7 +67,7 @@ class ProfileFragmentTest {
             navController.setViewModelStore(ViewModelStore())
             navController.setGraph(R.navigation.nav_main)
             navController.setCurrentDestination(R.id.profileFragment)
-            Navigation.setViewNavController(requireView(), navController)
+            Navigation.setViewNavController(findViewById(R.id.main_nav_host), navController)
         }
         assertEquals(navController.currentDestination?.id, R.id.profileFragment)
     }
